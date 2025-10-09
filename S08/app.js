@@ -33,7 +33,7 @@ scene.add(pointLight);
 const ambientLight = new THREE.AmbientLight(0x404040, 0.9);
 scene.add(ambientLight);
 
-const planets = [];
+const orbits = [];
 
 const planetsData = [
     { color: 0x4a90e2, size: 1.2, distance: 12, speed: 0.5 },
@@ -48,19 +48,37 @@ planetsData.forEach(planetInfo => {
     const planetMaterial = new THREE.MeshStandardMaterial({ color: planetInfo.color });
     const planetMesh = new THREE.Mesh(planetGeometry, planetMaterial);
 
-    planetMesh.distance = planetInfo.distance;
-    planetMesh.speed = planetInfo.speed;
+    const orbitGroup = new THREE.Group();
+    orbitGroup.rotation.x = (Math.random() - 0.5) * 0.3;
+    orbitGroup.rotation.z = (Math.random() - 0.5) * 0.3;
 
-    const randomAngle = Math.random() * Math.PI * 2;
-    // Store the random starting angle on the mesh itself
-    planetMesh.startAngle = randomAngle;
+    // --- Create the dotted line trajectory ---
+    const points = [];
+    const segments = 128;
+    for (let i = 0; i <= segments; i++) {
+        const theta = (i / segments) * Math.PI * 2;
+        points.push(new THREE.Vector3(Math.cos(theta) * planetInfo.distance, 0, Math.sin(theta) * planetInfo.distance));
+    }
+    const orbitGeometry = new THREE.BufferGeometry().setFromPoints(points);
+    const orbitMaterial = new THREE.LineDashedMaterial({
+        color: 0xffffff,
+        dashSize: 0.5,
+        gapSize: 0.25,
+    });
+    const orbitLine = new THREE.Line(orbitGeometry, orbitMaterial);
+    orbitLine.computeLineDistances(); // This is crucial for dashed lines to render
+    orbitGroup.add(orbitLine);
+    // --- End of trajectory code ---
 
-    // Set the initial position using the random angle
-    planetMesh.position.x = Math.cos(randomAngle) * planetInfo.distance;
-    planetMesh.position.z = Math.sin(randomAngle) * planetInfo.distance;
+    orbitGroup.speed = planetInfo.speed;
+    orbitGroup.startAngle = Math.random() * Math.PI * 2;
+    orbitGroup.rotation.y = orbitGroup.startAngle;
 
-    scene.add(planetMesh);
-    planets.push(planetMesh);
+    planetMesh.position.x = planetInfo.distance;
+    orbitGroup.add(planetMesh);
+    
+    scene.add(orbitGroup);
+    orbits.push(orbitGroup);
 });
 
 const clock = new THREE.Clock();
@@ -70,11 +88,8 @@ function animate() {
 
     const elapsedTime = clock.getElapsedTime();
 
-    planets.forEach(planet => {
-        // Calculate the angle of rotation based on time AND the initial random angle
-        const currentAngle = elapsedTime * planet.speed + planet.startAngle;
-        planet.position.x = Math.cos(currentAngle) * planet.distance;
-        planet.position.z = Math.sin(currentAngle) * planet.distance;
+    orbits.forEach(orbit => {
+        orbit.rotation.y = elapsedTime * orbit.speed + orbit.startAngle;
     });
 
     controls.update();
