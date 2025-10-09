@@ -41,12 +41,14 @@ scene.add(sunMesh);
 
 // 4. Light Creation
 // A point light so the sun emits light
-const pointLight = new THREE.PointLight(0xffffff, 1.5, 300);
+// UPDATED: Intensity dramatically increased from 5 to 20 for a very bright effect
+const pointLight = new THREE.PointLight(0xffffff, 250, 300);
 pointLight.position.set(0, 0, 0); // Light is in the same position as the sun
 scene.add(pointLight);
 
 // An ambient light to illuminate the scene uniformly
-const ambientLight = new THREE.AmbientLight(0x404040, 0.5);
+// UPDATED: Intensity slightly increased to 0.3
+const ambientLight = new THREE.AmbientLight(0x404040, 0.3);
 scene.add(ambientLight);
 
 // --- 5. Planet Creation ---
@@ -56,9 +58,9 @@ const planets = [];
 
 // Data for our planets [color, size, orbital radius, orbital speed]
 const planetsData = [
-    { color: 0x4a90e2, size: 1.2, distance: 12, speed: 0.005 },  // Blue planet
-    { color: 0xd0021b, size: 0.8, distance: 18, speed: 0.003 },  // Red planet
-    { color: 0xf5a623, size: 2, distance: 25, speed: 0.0015 }  // Orange/Gas planet
+    { color: 0x4a90e2, size: 1.2, distance: 12, speed: 0.5 },  // Blue planet
+    { color: 0xd0021b, size: 0.8, distance: 18, speed: 0.3 },  // Red planet
+    { color: 0xf5a623, size: 2, distance: 25, speed: 0.15 }  // Orange/Gas planet
 ];
 
 // Loop through the data to create each planet
