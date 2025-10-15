@@ -33,6 +33,25 @@ scene.add(pointLight);
 const ambientLight = new THREE.AmbientLight(0x404040, 0.9);
 scene.add(ambientLight);
 
+// --- Starfield Creation ---
+const starGeometry = new THREE.BufferGeometry();
+const starCount = 5000;
+const positions = new Float32Array(starCount * 3);
+for (let i = 0; i < starCount; i++) {
+    positions[i * 3] = (Math.random() - 0.5) * 200;
+    positions[i * 3 + 1] = (Math.random() - 0.5) * 200;
+    positions[i * 3 + 2] = (Math.random() - 0.5) * 200;
+}
+starGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+const starMaterial = new THREE.PointsMaterial({
+    color: 0xffffff,
+    size: 0.1,
+    sizeAttenuation: true
+});
+const stars = new THREE.Points(starGeometry, starMaterial);
+scene.add(stars);
+// --- End of Starfield code ---
+
 const orbits = [];
 
 const planetsData = [
@@ -52,7 +71,6 @@ planetsData.forEach(planetInfo => {
     orbitGroup.rotation.x = (Math.random() - 0.5) * 0.3;
     orbitGroup.rotation.z = (Math.random() - 0.5) * 0.3;
 
-    // --- Create the dotted line trajectory ---
     const points = [];
     const segments = 128;
     for (let i = 0; i <= segments; i++) {
@@ -66,9 +84,8 @@ planetsData.forEach(planetInfo => {
         gapSize: 0.25,
     });
     const orbitLine = new THREE.Line(orbitGeometry, orbitMaterial);
-    orbitLine.computeLineDistances(); // This is crucial for dashed lines to render
+    orbitLine.computeLineDistances();
     orbitGroup.add(orbitLine);
-    // --- End of trajectory code ---
 
     orbitGroup.speed = planetInfo.speed;
     orbitGroup.startAngle = Math.random() * Math.PI * 2;
