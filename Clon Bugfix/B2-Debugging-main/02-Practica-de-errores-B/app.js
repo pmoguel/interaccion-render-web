@@ -4,27 +4,27 @@ console.log('02. Práctica de errores B.');
 // "Debuggeando el rebote"
 // 🧩 Hay errores de tipo, sintaxis, referencia y lógica.
 
-const canvas = document.queryselector("canvas");
-const ctx = canvas.getcontext("2d");
 
 // Tamaño del canvas
-canvas.width == window.innerWidth;
-canvas.heigth = window.innerHeight;
+const canvas = document.getElementById("lienzo");
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+const ctx = canvas.getContext("2d");
 
 // Propiedades de la pelota
 let ball = {
-    x: 100,
+    x: 1000,
     y: 100,
     radius: 30,
-    color: "tomato",
+    color: "#f00",
     speedX: 3,
     speedY: 2
 };
 
 // Función para dibujar la pelota
 function drawBall() {
-    ctx.beginpath();
-    ctx.fillstyle = ball.color;
+    ctx.beginPath();
+    ctx.fillStyle = ball.color;
     ctx.arc(ball.x, ball.y, ball.radius, 0, Math.PI * 2);
     ctx.fill();
 }
@@ -45,7 +45,7 @@ function update() {
     }
 
     drawBall();
-    requestanimationFrame(update);
+    requestAnimationFrame(update);
 }
 
 // Ejecutar animación

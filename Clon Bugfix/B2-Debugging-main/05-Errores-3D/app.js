@@ -1,18 +1,21 @@
 /* 05. Errores 3D. */
 console.log('05. Errores 3D.');
+//console.log(THREE);
 
 // --- ESCENA, CÁMARA Y RENDERER ---
+
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(
-    95,
-    window.innerHeight / window.innerWidth,
+    90,
+    window.innerWidth / window.innerHeight,
     0.1,
     1000
 );
-
 const renderer = new THREE.WebGLRenderer();
 renderer.setSize(window.innerWidth, window.innerHeight);
-document.body.appendChild(renderer.domElemnt);
+document.body.appendChild(renderer.domElement);
+
+var rotationSpeed = 0.05;
 
 camera.position.z = 5;
 
@@ -22,6 +25,7 @@ scene.add(ambientLight);
 
 const pointLight = new THREE.PointLight(0xff0000, 1);
 pointLight.position.set(2, 2, 2);
+scene.add(pointLight);
 
 // --- OBJETOS ---
 const cubeGeo = new THREE.BoxGeometry();
@@ -30,7 +34,7 @@ const cube = new THREE.Mesh(cubeGeo, cubeMat);
 scene.add(cube);
 
 const sphereGeo = new THREE.SphereGeometry(1.5, 32, 32);
-const sphereMat = new THREE.MeshStandardMaterial({ colour: 0xffffff });
+const sphereMat = new THREE.MeshStandardMaterial({ color: 0xffffff });
 const sphere = new THREE.Mesh(sphereGeo, sphereMat);
 scene.add(sphere);
 
@@ -58,3 +62,9 @@ function animate() {
 }
 
 animate();
+
+/*
+1. Arreglar el orden de los scripts en el HTML.
+2. Corregir la luz
+3. Corregir la camara para no aplastar el cubo
+*/

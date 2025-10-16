@@ -12,7 +12,7 @@ let ball = {
     x: 250,
     y: 50,
     radius: 25,
-    color: 'green'
+    color: 'orange'
 };
 
 // Velocidad y gravedad
@@ -36,14 +36,19 @@ function updateBall() {
     speed.y += gravity;
 
     // Rebote en el piso
-    if (ball.y + ball.radius > canvas.height || ball.y <= 0) {
+    if (ball.y + ball.radius > canvas.height) {
         ball.y = canvas.height - ball.radius;
         speed.y *= -bounceFactor;
+    }
+    
+    if (ball.y - ball.radius < 0) {
+        ball.y = ball.radius;
+        speed.y *=-1;
     }
 
     // Rebote en los lados
     if (ball.x + ball.radius > canvas.width || ball.x - ball.radius < 0) {
-        speed.x *= -1.5;
+        speed.x *=-1;
     }
 }
 
@@ -57,3 +62,8 @@ function animate() {
 }
 
 animate();
+
+/*
+1. Cambie speed de -1.5 a -1
+2. Separe " || ball.y <= 1 " en una condicion aparte
+*/

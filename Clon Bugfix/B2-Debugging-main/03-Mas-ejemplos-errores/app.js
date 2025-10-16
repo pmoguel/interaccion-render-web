@@ -21,6 +21,7 @@ function createBall() {
         radius: 20,
         color: 'tomato',
     };
+    return b;
 }
 
 function drawBall() {
@@ -56,3 +57,7 @@ function animate() {
 }
 
 animate();
+
+/*
+Agregue un return b
+*/
