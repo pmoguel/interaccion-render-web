@@ -1,9 +1,40 @@
 body {
     margin: 0;
-    overflow: hidden;
-    background-color: #000000;
+    overflow: hidden; /* Prevent scrollbars */
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
 }
 
 canvas {
     display: block;
 }
+
+#toggle-camera {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    padding: 10px 15px;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: 1px solid white;
+    border-radius: 5px;
+    cursor: pointer;
+    z-index: 10;
+}
+
+#free-camera-info {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-align: center;
+    z-index: 10;
+}
+
+.hidden {
+    display: none;
+}
+

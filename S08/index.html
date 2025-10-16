@@ -1,29 +1,27 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sistema Solar con Three.js y GSAP</title>
-    <!-- Enlace a la hoja de estilos -->
+    <title>Solar System</title>
     <link rel="stylesheet" href="main.css">
 </head>
 <body>
-    <!-- El lienzo donde se renderizará la escena -->
     <canvas id="solar-system"></canvas>
-
-    <!-- Importar Three.js y GSAP desde CDN -->
-    <script async src="https://unpkg.com/es-module-shims@1.6.3/dist/es-module-shims.js"></script>
+    <button id="toggle-camera">Free Camera</button>
+    <div id="free-camera-info" class="hidden">
+        <p><strong>Free Camera Mode</strong></p>
+        <p>W/A/S/D - Move | Q/E - Up/Down | Mouse - Look</p>
+    </div>
     <script type="importmap">
         {
             "imports": {
-                "three": "https://cdn.jsdelivr.net/npm/three@0.157.0/build/three.module.js",
-                "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.157.0/examples/jsm/",
-                "gsap": "https://unpkg.com/gsap@3.12.2/index.js"
+                "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+                "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/",
+                "gsap": "https://unpkg.com/gsap@3.12.5/index.js"
             }
         }
     </script>
-
-    <!-- Enlace al script principal de la aplicación -->
     <script type="module" src="app.js"></script>
 </body>
 </html>
