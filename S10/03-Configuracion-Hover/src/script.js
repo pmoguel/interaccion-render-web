@@ -1,5 +1,5 @@
 import * as THREE from 'three'
-
+import gsap from 'gsap';
 /**
  * Base
  */
@@ -63,12 +63,37 @@ renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
 
 /**
+ * Raycaster
+ */
+const raycaster = new THREE.Raycaster()
+const pointer = new THREE.Vector2()
+
+// Mouse move handler
+window.addEventListener('mousemove', (event) => {
+    // Convert mouse position to normalized device coordinates
+    pointer.x = (event.clientX / sizes.width) * 2 - 1
+    pointer.y = - (event.clientY / sizes.height) * 2 + 1
+})
+
+/**
  * Animate
  */
 const clock = new THREE.Clock();
 
 const tick = () => {
     const elapsedTime = clock.getElapsedTime();
+
+    // Update raycaster
+    raycaster.setFromCamera(pointer, camera)
+    const intersects = raycaster.intersectObject(object1)
+
+    if(intersects.length) {
+        // Mouse enter
+        gsap.to(object1.scale, { x: 1.5, y: 1.5, z: 1.5, duration: 0.3 })
+    } else {
+        // Mouse leave
+        gsap.to(object1.scale, { x: 1, y: 1, z: 1, duration: 0.3 })
+    }
 
     // Animate objects
     object1.position.y = Math.sin(elapsedTime * 2) * 0.1;
