@@ -9,7 +9,7 @@ console.log('main.js');
     c. Finalmente, actualizamos el registro de la posición de la última imagen ya que creamos una nueva.
 
 */
-const minDistance = 50;
+const minDistance = 70;
 var lastPos = {
     x: 0,
     y: 0,
@@ -59,6 +59,7 @@ function createFloatingImage(posX, posY){
     img.style.left = posX - (113.5) + "px";
     img.style.position = "absolute";
     img.style.opacity = 0;
+    img.style.zIndex = Math.round(Math.random() * 10);
     document.body.appendChild(img);
 
     gsap.to(img,{

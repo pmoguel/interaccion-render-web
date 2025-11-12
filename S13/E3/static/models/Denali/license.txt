@@ -1,0 +1,11 @@
+Model Information:
+* title:	NFS UNBOUND TRAFFIC GMC YUKON DENALI 2015
+* source:	https://sketchfab.com/3d-models/nfs-unbound-traffic-gmc-yukon-denali-2015-83bc1a1250df45358dec5e106dbff0e6
+* author:	BOOST7 (https://sketchfab.com/bogdanvelia64)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "NFS UNBOUND TRAFFIC GMC YUKON DENALI 2015" (https://sketchfab.com/3d-models/nfs-unbound-traffic-gmc-yukon-denali-2015-83bc1a1250df45358dec5e106dbff0e6) by BOOST7 (https://sketchfab.com/bogdanvelia64) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
